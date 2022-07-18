@@ -9,7 +9,7 @@ ENV LANG='en_US.UTF-8' \
 RUN apk --no-cache update && \
 	apk add --no-cache \
 	nginx \
-	bash \
+	bash
 #	openssh
 #	certbot
 
