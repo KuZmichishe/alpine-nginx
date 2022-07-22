@@ -9,9 +9,10 @@ ENV LANG='en_US.UTF-8' \
 RUN apk --no-cache update && \
 	apk add --no-cache \
 	nginx \
-	bash
+	bash \
+	certbot
 #	openssh
-#	certbot
+
 
 ### Remove cache and tmp data
 RUN rm -rf \ 
