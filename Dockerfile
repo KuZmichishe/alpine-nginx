@@ -3,23 +3,17 @@ FROM alpine:latest
 ### Install Applications
 RUN apk --no-cache update && \
 	apk add --no-cache \
-	nginx \
-	bash \
-	certbot
-#	openssh
+	nginx
 
 
 ### Remove cache and tmp data
-RUN rm -rf \ 
+RUN rm -rf \
 	/var/cache/apk/* \
 	/tmp/* \
 	/var/tmp/*
 
 RUN mkdir -p /tmp/nginx/client-body
 RUN mkdir -p /etc/nginx/sites-enabled
-
-### Volume
-VOLUME ["/etc/letsencrypt"]
 
 ### Copy Nginx configs
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
@@ -32,12 +26,4 @@ COPY nginx/sites-enabled /etc/nginx/sites-enabled
 EXPOSE 80
 EXPOSE 443
 
-COPY ./docker-entrypoint.sh /
-RUN chmod +x docker-entrypoint.sh
-
-ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD ["certbot"]
-
-#ENTRYPOINT ["sh", "-c", "nginx"]
-
-#CMD ["nginx", "-g", "daemon off;"]
+CMD ["nginx", "-g", "daemon off;"]
