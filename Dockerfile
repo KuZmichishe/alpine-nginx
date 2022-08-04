@@ -1,10 +1,5 @@
 FROM alpine:latest
 
-### Environment variables
-ENV LANG='en_US.UTF-8' \
-    LANGUAGE='en_US.UTF-8' \
-    TERM='xterm' 
-
 ### Install Applications
 RUN apk --no-cache update && \
 	apk add --no-cache \
@@ -37,12 +32,12 @@ COPY nginx/sites-enabled /etc/nginx/sites-enabled
 EXPOSE 80
 EXPOSE 443
 
-#COPY ./docker-entrypoint.sh /
-#RUN chmod +x docker-entrypoint.sh
+COPY ./docker-entrypoint.sh /
+RUN chmod +x docker-entrypoint.sh
 
-#ENTRYPOINT ["/docker-entrypoint.sh"]
-#CMD ["certbot"]
+ENTRYPOINT ["/docker-entrypoint.sh"]
+CMD ["certbot"]
 
 #ENTRYPOINT ["sh", "-c", "nginx"]
 
-CMD ["nginx", "-g", "daemon off;"]
+#CMD ["nginx", "-g", "daemon off;"]
