@@ -15,7 +15,7 @@ RUN apk --no-cache update && \
 
 
 ### Remove cache and tmp data
-RUN rm -rf \ 
+RUN rm -rf \
 	/var/cache/apk/* \
 	/tmp/* \
 	/var/tmp/*
